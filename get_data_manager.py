@@ -19,18 +19,18 @@ def recuperer_les_datas(date_debut,date_fin,function, symbol, interval, adjusted
 def recuperer_la_data(function, symbol, interval, adjusted, extended_hours, month, outputsize, datatype):
     data_filename = symbol + interval + ".json"
     if path.exists(data_filename) : 
-        print(f"File {data_filename} already exists. Data not overwritten.")
+        #print(f"File {data_filename} already exists. Data not overwritten.")
         with open(data_filename, 'r') as f:
             data = json.load(f)
         data_complete = list(data.keys())[1]
         data_start = list(data[data_complete].keys())[-1]
         data_start = datetime.strptime(data_start, '%Y-%m-%d %H:%M:%S')
         data_start_month_str = data_start.strftime('%Y-%m')
-        print(f"Data starts at {data_start_month_str}")
+        #print(f"Data starts at {data_start_month_str}")
         data_end = list(data[data_complete].keys())[0]
         data_end = datetime.strptime(data_end, '%Y-%m-%d %H:%M:%S')
         data_end_month_str = data_end.strftime('%Y-%m')
-        print(f"Data ends at {data_end_month_str}")
+        #print(f"Data ends at {data_end_month_str}")
         data_start_month_dt = datetime.strptime(data_start_month_str, '%Y-%m')
         data_end_month_dt = datetime.strptime(data_end_month_str, '%Y-%m')
         month_dt = datetime.strptime(month, '%Y-%m')
@@ -40,6 +40,9 @@ def recuperer_la_data(function, symbol, interval, adjusted, extended_hours, mont
             url = BASE_URL + "function=" + function + "&symbol="+symbol+"&interval="+interval+"&adjusted="+adjusted+"&extended_hours="+extended_hours+"&month="+month+"&outputsize="+outputsize+"&datatype="+datatype+"&apikey=" + API_KEY
             r = requests.get(url)
             data = r.json()
+            if len(data) == 1:
+                print("API call frequency limit reached. Please wait and try again later.")
+                return None
         except: 
             print("Error in API call, possibly due to network issues or invalid response.")
             return None
