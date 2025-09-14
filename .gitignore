@@ -1,0 +1,47 @@
+# --- Python compilé / cache ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Environnements virtuels ---
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# --- Config / dépendances locales ---
+*.log
+*.pot
+*.pyc
+pip-wheel-metadata/
+*.sqlite3
+
+# --- Fichiers d’IDE / éditeur ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- OS spécifiques ---
+.DS_Store
+Thumbs.db
+
+# --- Tests ---
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+
+# --- Jupyter Notebook ---
+.ipynb_checkpoints
+
+# --- Build / distribution ---
+build/
+dist/
+*.egg-info/
+.eggs/
+
+
+
+api_config.py
