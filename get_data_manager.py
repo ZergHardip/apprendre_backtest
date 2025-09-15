@@ -35,7 +35,7 @@ def recuperer_la_data(function, symbol, interval, adjusted, extended_hours, mont
         data_end_month_dt = datetime.strptime(data_end_month_str, '%Y-%m')
         month_dt = datetime.strptime(month, '%Y-%m')
         
-    if not path.exists(data_filename) or data_start_month_dt < month_dt or month_dt < data_end_month_dt : #mettre la date du debut et de la fin des donnees que l'on veut
+    if not path.exists(data_filename) or not (data_start_month_dt <= month_dt <= data_end_month_dt): #mettre la date du debut et de la fin des donnees que l'on veut
         try:
             url = BASE_URL + "function=" + function + "&symbol="+symbol+"&interval="+interval+"&adjusted="+adjusted+"&extended_hours="+extended_hours+"&month="+month+"&outputsize="+outputsize+"&datatype="+datatype+"&apikey=" + API_KEY
             r = requests.get(url)
